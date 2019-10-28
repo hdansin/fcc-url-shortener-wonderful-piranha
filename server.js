@@ -18,6 +18,7 @@ app.use(cors());
 
 /** this project needs to parse POST bodies **/
 // you should mount the body-parser here
+var bodyParser = require('body-parser');
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
