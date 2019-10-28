@@ -9,11 +9,11 @@ var app = express();
 
 // Make URL Model
 var Schema = mongoose.Schema;
-
 var urlSchema = new Schema({
-  original: String,
-  short: Number
+  original_url: String,
+  short_url: Number
 });
+var URL = mongoose.model("URL", urlSchema);
 
 // Basic Configuration 
 var port = process.env.PORT || 3000;
@@ -39,7 +39,7 @@ app.get("/api/hello", function (req, res) {
 
 // URL poster
 app.post("api/shorturl/new", function(req, res) {
-
+  let 
 });
 
 app.listen(port, function () {
