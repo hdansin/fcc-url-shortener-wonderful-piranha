@@ -19,7 +19,9 @@ var URL = mongoose.model("URL", urlSchema);
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGOLAB_URI, { useNewUrlParser : true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 app.use(cors());
 
@@ -39,8 +41,8 @@ app.get("/api/hello", function (req, res) {
 
 // URL poster
 app.post("api/shorturl/new", function(req, res) {
-  console.log(req.body)
-  res.json(req.body)
+  console.log(req.body);
+  res.json(req.body);
 });
 
 app.listen(port, function () {
