@@ -53,7 +53,7 @@ app
   })
   .post(urlencodedParser, function(req, res) {
     // check if valid url
-    var myURL =  new URL(req.body.url);
+    var myURL =  new URL(req.body.url, 'https://example.com');
     
 
     res.json(myURL);
