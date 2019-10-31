@@ -20,8 +20,7 @@ var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
 mongoose.connect(process.env.MONGOLAB_URI, {
-  useNewUrlParser : true, 
-  useMongoClient : true 
+  useNewUrlParser : true 
 });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
