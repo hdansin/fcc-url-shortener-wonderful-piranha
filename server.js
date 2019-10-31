@@ -39,7 +39,7 @@ app.get("/api/hello", function (req, res) {
 
 // URL poster
 app.post("api/shorturl/new", function(req, res) {
-  
+  console.log(req.body)
 });
 
 app.listen(port, function () {
