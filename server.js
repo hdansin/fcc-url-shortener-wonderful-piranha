@@ -44,14 +44,16 @@ app.get("/api/hello", function (req, res) {
 
 // URL poster
 app
-  .route("api/shorturl/:url?") 
+  .route("/api/shorturl/:url?") 
   .get(function(req, res) {
-    res.json({ url : req.param})
+    res.json({ url : req.params.url})
   })
   .post(bodyParser, function(req, res) {
-    console.log(req);
-    res.json(req.body);
-  });
+    var urlString = req.params.url;
+    if (urlString === "new") {
+      res.json( { new: urlString } );
+    }
+  })
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
