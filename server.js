@@ -52,7 +52,10 @@ app
     res.json({ url : req.params.url})
   })
   .post(urlencodedParser, function(req, res) {
+    // check if valid url
     var urlString = req.body.url;
+    
+
     res.json(urlString);
   })
 
