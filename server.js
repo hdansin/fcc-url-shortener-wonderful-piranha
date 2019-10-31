@@ -43,7 +43,7 @@ app.get("/api/hello", function (req, res) {
 });
 
 // URL poster
-app.post("api/shorturl/new", function(req, res) {
+app.post("api/shorturl/new", bodyParser, function(req, res) {
   console.log(req);
   res.json(req.body);
 });
