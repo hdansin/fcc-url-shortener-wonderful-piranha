@@ -5,6 +5,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var url = require('url');
 var app = express();
 
 // Make URL Model
@@ -53,10 +54,13 @@ app
   })
   .post(urlencodedParser, function(req, res) {
     // check if valid url
-    var myURL =  new URL(req.body.url, 'https://example.com');
-    
-
-    res.json(myURL);
+    var myURL = url.parse(req.body.url);
+    if (!myURL.host) {
+      res.json({ "error": "Invalid URL" })
+    } 
+    else {
+      res.json(myURL);
+    }
   })
 
 app.listen(port, function () {
