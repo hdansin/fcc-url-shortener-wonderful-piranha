@@ -34,9 +34,6 @@ app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
-app.use(bodyParser.json());
-
 app.use('/public', express.static(process.cwd() + '/public'));
 
 app.get('/', function(req, res){
@@ -55,10 +52,8 @@ app
     res.json({ url : req.params.url})
   })
   .post(bodyParser, function(req, res) {
-    var urlString = req.params.url;
-    if (urlString === "new") {
-      res.json( { new: urlString } );
-    }
+    var urlString = req.body;
+    res.json(req.body)
   })
 
 app.listen(port, function () {
