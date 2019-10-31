@@ -43,10 +43,15 @@ app.get("/api/hello", function (req, res) {
 });
 
 // URL poster
-app.post("api/shorturl/new", bodyParser, function(req, res) {
-  console.log(req);
-  res.json(req.body);
-});
+app
+  .route("api/shorturl/:url?") 
+  .get(function(req, res) {
+    res.json({ url : req.param})
+  })
+  .post(bodyParser, function(req, res) {
+    console.log(req);
+    res.json(req.body);
+  });
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
