@@ -32,7 +32,7 @@ app.use(cors());
 // you should mount the body-parser here
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
@@ -51,9 +51,9 @@ app
   .get(function(req, res) {
     res.json({ url : req.params.url})
   })
-  .post(bodyParser, function(req, res) {
-    var urlString = req.body;
-    res.json(req.body)
+  .post(urlencodedParser, function(req, res) {
+    var urlString = req.body.url;
+    res.json(urlString);
   })
 
 app.listen(port, function () {
