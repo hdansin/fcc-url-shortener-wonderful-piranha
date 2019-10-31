@@ -53,10 +53,10 @@ app
   })
   .post(urlencodedParser, function(req, res) {
     // check if valid url
-    var urlString = req.body.url;
+    var myURL =  new URL(req.body.url);
     
 
-    res.json(urlString);
+    res.json(myURL);
   })
 
 app.listen(port, function () {
