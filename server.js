@@ -11,9 +11,9 @@ var app = express();
 // Make URL Model
 var Schema = mongoose.Schema;
 var urlSchema = new Schema({
-  original_url: String
+  original_url: String,
+  short_url: Number
 });
-urlSchema.index({ short_url: 1});
 var urlObject = mongoose.model("URL", urlSchema);
 
 // Basic Configuration 
@@ -67,7 +67,7 @@ app
     } 
     else if (req.params.url === "new") {
       // save the new url
-      var newURL = new urlObject({ original_url : myURL.host});
+      var newURL = new urlObject({ original_url : myURL.host, short_url: num });
       num++;
       newURL.save(function(err, newURL) {
         if (err) return console.error(err);
