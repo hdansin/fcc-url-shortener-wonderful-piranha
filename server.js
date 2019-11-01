@@ -14,7 +14,7 @@ var urlSchema = new Schema({
   original_url: String,
   short_url: Number
 });
-var URL = mongoose.model("URL", urlSchema);
+var urlObject = mongoose.model("URL", urlSchema);
 
 // Basic Configuration 
 var port = process.env.PORT || 3000;
@@ -56,10 +56,12 @@ app
     // check if valid url
     var myURL = url.parse(req.body.url);
     if (!myURL.host) {
+      // return error
       res.json({ "error": "Invalid URL" })
     } 
-    else {
-      res.json(myURL);
+    else if (req.params.url === "new") {
+      // save the new url
+      var newURL = new urlObject({ original_url : myURL.host, short_url: _index + 1 })
     }
   })
 
