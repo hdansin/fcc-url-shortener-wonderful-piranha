@@ -11,9 +11,9 @@ var app = express();
 // Make URL Model
 var Schema = mongoose.Schema;
 var urlSchema = new Schema({
-  original_url: String,
-  short_url: Number
+  original_url: String
 });
+urlSchema.index({ short_url: 1});
 var urlObject = mongoose.model("URL", urlSchema);
 
 // Basic Configuration 
@@ -52,7 +52,10 @@ app
   .route("/api/shorturl/:url?") 
   .get(function(req, res) {
     if (parseInt(req.params.url)) {
-      
+      urlObject.findOne({short_url : parseInt(req.params.url)}, function(err, destination) {
+        if (err) return console.error(err);
+        res.redirect(destination.original_url);
+      })
     }
   })
   .post(urlencodedParser, function(req, res) {
@@ -64,7 +67,7 @@ app
     } 
     else if (req.params.url === "new") {
       // save the new url
-      var newURL = new urlObject({ original_url : myURL.host, short_url: num });
+      var newURL = new urlObject({ original_url : myURL.host});
       num++;
       newURL.save(function(err, newURL) {
         if (err) return console.error(err);
