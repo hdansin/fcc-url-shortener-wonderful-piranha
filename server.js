@@ -52,8 +52,7 @@ app
   .route("/api/shorturl/:url?") 
   .get(function(req, res) {
     if (parseInt(req.params.url)) {
-      var 
-      res.redirect()
+      
     }
   })
   .post(urlencodedParser, function(req, res) {
