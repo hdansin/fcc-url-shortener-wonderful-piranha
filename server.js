@@ -51,7 +51,10 @@ var num = 1;
 app
   .route("/api/shorturl/:url?") 
   .get(function(req, res) {
-    res.json({ url : req.params.url})
+    if (parseInt(req.params.url)) {
+      var 
+      res.redirect()
+    }
   })
   .post(urlencodedParser, function(req, res) {
     // check if valid url
@@ -62,15 +65,12 @@ app
     } 
     else if (req.params.url === "new") {
       // save the new url
-      var newURL = new urlObject({ original_url : myURL.host, short_url: num});
+      var newURL = new urlObject({ original_url : myURL.host, short_url: num });
       num++;
       newURL.save(function(err, newURL) {
         if (err) return console.error(err);
       });
-      res.json()
-    }
-    else {
-
+      res.json(newURL)
     }
   })
 
