@@ -54,7 +54,8 @@ app
     if (parseInt(req.params.url)) {
       urlObject.findOne({short_url : parseInt(req.params.url)}, function(err, destination) {
         if (err) return console.error(err);
-        res.redirect(destination.original_url);
+        console.log(destination.original_url)
+        return res.redirect(destination.original_url);
       })
     }
   })
