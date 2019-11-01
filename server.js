@@ -47,6 +47,7 @@ app.get("/api/hello", function (req, res) {
 });
 
 // URL poster
+var num = 1;
 app
   .route("/api/shorturl/:url?") 
   .get(function(req, res) {
@@ -61,7 +62,15 @@ app
     } 
     else if (req.params.url === "new") {
       // save the new url
-      var newURL = new urlObject({ original_url : myURL.host, short_url: _index + 1 })
+      var newURL = new urlObject({ original_url : myURL.host, short_url: num});
+      num++;
+      newURL.save(function(err, newURL) {
+        if (err) return console.error(err);
+      });
+      res.json()
+    }
+    else {
+
     }
   })
 
