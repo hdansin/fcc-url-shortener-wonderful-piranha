@@ -66,7 +66,7 @@ app
     } 
     else if (req.params.url === "new") {
       // save the new url
-      var numURLs = urlObject.estimatedDocumentCount();
+      var numURLs = urlObject.estimatedDocumentCount() + 1;
       var newURL = new urlObject({ original_url : myURL.host, short_url: numURLs });
       newURL.save(function(err, newURL) {
         if (err) return console.error(err);
